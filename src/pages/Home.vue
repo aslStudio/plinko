@@ -1,11 +1,16 @@
 <template lang="pug">
-h1 TITLE
+the-canvas
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"; 
+import { defineComponent } from "vue";
+
+import { TheCanvas } from "@/widgets";
 
 export default defineComponent({
-    name: 'Home',
-})
+  name: "HomePage",
+  components: {
+    "the-canvas": TheCanvas,
+  },
+});
 </script>

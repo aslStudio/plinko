@@ -1,48 +1,32 @@
 export class Stick {
-    ctx: CanvasRenderingContext2D | undefined
-    id: number;
-    x: number;
-    y: number;
-    size: number;
-    constructor(id: number, canvas: HTMLCanvasElement) {
-        this.id = id
+    private readonly _ctx: CanvasRenderingContext2D | undefined;
+    private readonly _id: string;
+    private readonly _x: number;
+    private readonly _y: number;
+    private readonly _size: number;
 
-        const coordinates = getStickCoordinates(id)
-        this.x = coordinates.x
-        this.y = coordinates.y
+    constructor(
+        canvas: HTMLCanvasElement,
+        line: number,
+        column: number,
+        size: number,
+        x: number,
+        y: number
+    ) {
+        this._id = `${line}-${column}`;
 
-        this.size = getStickSize(id)
+        this._ctx = canvas.getContext("2d")!;
+        this._size = size;
 
-        const context = canvas.getContext('2d')
-        if (context) {
-            this.ctx = context
+        this._x = x;
+        this._y = y;
+    }
+    public draw() {
+        if (this._ctx) {
+            this._ctx.beginPath();
+            this._ctx.arc(this._x, this._y, this._size / 2, 0, 2 * Math.PI, false);
+            this._ctx.fillStyle = "black";
+            this._ctx.fill();
         }
     }
-    draw() {
-        if (this.ctx) {
-            this.ctx.beginPath()
-            this.ctx.arc(this.x, this.x, this.size / 2, 0, 2 * Math.PI, false)
-            this.ctx.fillStyle = 'black';
-            this.ctx.fill();
-        }
-    }
-}
-
-function getStickCoordinates(
-    id: number
-): {
-    x: number
-    y: number
-} {
-    // TODO: x and y is center coordinates
-    return {
-        x: 1,
-        y: 1,
-    }
-}
-
-function getStickSize(
-    id: number
-): number {
-    return 18
 }
