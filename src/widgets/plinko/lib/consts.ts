@@ -1,0 +1,1 @@
+export const CANVAS_ID = 'the-canvas'
