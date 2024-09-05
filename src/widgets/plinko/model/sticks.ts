@@ -13,6 +13,9 @@ export class Sticks {
     public update(lines: number, canvas: HTMLCanvasElement) {
         this._list = getSticks(lines, canvas)
     }
+    public get coordinatesList() {
+        return this._list.map(item => item.coordinates)
+    }
 }
 
 function getSticks(lines: number, canvas: HTMLCanvasElement) {

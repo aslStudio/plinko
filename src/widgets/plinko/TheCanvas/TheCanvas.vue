@@ -1,7 +1,18 @@
 <template lang="pug">
-canvas(
-    :id="id"
-)
+div
+  div(
+    :class="$style.root"
+  )
+    canvas(
+      :id="sticksID"
+    )
+    canvas(
+      :class="$style.bomb"
+      :id="bombID"
+    )
+  button(
+    @click="onPlay"
+  ) PLAY
 </template>
 
 <script lang="ts">
@@ -14,13 +25,35 @@ export default defineComponent({
   setup() {
     const plinko = new Plinko();
 
+    function onPlay() {
+      // requestAnimationFrame(onPlay)
+      plinko.play();
+    }
+
     onMounted(() => {
       plinko.init();
     });
 
     return {
-      id: consts.CANVAS_ID,
+      sticksID: consts.CANVAS_ID,
+      bombID: consts.BOMB_CANVAS_ID,
+      onPlay,
     };
   },
 });
 </script>
+
+<style lang="scss" module>
+.root {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bomb {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>

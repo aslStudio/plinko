@@ -29,4 +29,11 @@ export class Stick {
             this._ctx.fill();
         }
     }
+    public get coordinates() {
+        return {
+            x: this._x,
+            y: this._y,
+            radius: this._size / 2,
+        }
+    }
 }
